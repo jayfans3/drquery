@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model modelId="GPRSFLOW" name="GRPS详单" process="gprsProcess" table="GPRS">
+    <field name="LOG_ID" type="string" cname="日志ID" commonField="true" backName="LOG_ID"/>
+    <field name="ROW_NUM" type="string" cname="记录id" commonField="true" backName="ROW_NUM"/>
+    <field name="PHONE_NO" type="string" cname="用户帐号" commonField="true" backName="phoneNo"/>
+    <field name="APN_ID" type="string" cname="接入点" commonField="true" backName="APN_ID" />
+    <field name="ACCESS_MODE_ID" type="string" cname="接入方式" commonField="true" backName="ACCESS_MODE_ID"/>
+    <field name="TERM_TYPE_ID" type="string" cname="终端类型" commonField="true" backName="TERM_TYPE_ID"/>
+    <field name="TERM_MANUFACTURER_ID" type="string" cname="终端厂商ID" commonField="true" backName="TERM_MANUFACTURER_ID"/>
+    <field name="TERM_BRAND_ID" type="string" cname="终端品牌ID" commonField="true" backName="TERM_BRAND_ID" />
+    <field name="TERM_MODEL_ID" type="string" cname="终端型号标识" commonField="true" backName="termTypeName" escapeField="K1"/>
+    <field name="TERM_OS" type="string" cname="操作系统" commonField="true" backName="TERM_OS"/>
+    <field name="SCREEN_SIZE" type="string" cname="终端屏幕大小" commonField="true" backName="SCREEN_SIZE"/>
+    <field name="TERM_PRICE_ID" type="string" cname="终端价位区间" commonField="true" backName="TERM_PRICE_ID"/>
+    <field name="Imei编号" type="string" cname="IMEI_ID" commonField="true" backName="Imei"/>
+    <field name="LOGIC_AREA_ID" type="string" cname="位置逻辑区编号" commonField="true" backName="LOGIC_AREA_ID" />
+    <field name="LOGIC_AREA_SUBTYPE_ID" type="string" cname="位置逻辑区类型编号" commonField="true" backName="LOGIC_AREA_SUBTYPE_ID"/>
+    <field name="LOGIC_AREA_TYPE_ID" type="string" cname="位置逻辑区类别编号" commonField="true" backName="LOGIC_AREA_TYPE_ID"/>
+    <field name="LOGIC_AREA_NAME" type="string" cname="位置逻辑区名称" commonField="true" backName="LOGIC_AREA_NAME"/>
+    <field name="LAC" type="string" cname="路由标识" commonField="true" backName="LAC"/>
+    <field name="CI" type="string" cname="小区标识" commonField="true" backName="CI"/>
+    <field name="LOAD_PROTOCOL_ID" type="string" cname="承载层协议" commonField="true" backName="LOAD_PROTOCOL_ID"/>
+    <field name="APP_PROTOCOL_ID" type="string" cname="应用层协议编号" commonField="true" backName="APP_PROTOCOL_ID"/>
+    <field name="BUSI_ID" type="string" cname="业务编号" commonField="true" backName="BUSI_ID" escapeField="K1"/>
+    <field name="APP_ID" type="string" cname="业务入口编号" commonField="true" backName="appName" escapeField="K1"/>
+    <field name="BUSI_TYPE_ID" type="string" cname="业务类别编码" commonField="true" backName="appType" escapeField="K1"/>
+    <field name="BUSI_PROVIDER_ID" type="string" cname="业务提供商编号" commonField="true" backName="BUSI_PROVIDER_ID"/>
+    <field name="START_TIME" type="string" cname="开始时间" commonField="true" backName="startTime"/>
+    <field name="UP_PACK" type="string" cname="上行包数" commonField="true" backName="UP_PACK"/>
+    <field name="DOWN_PACK" type="string" cname="下行包数" commonField="true" backName="DOWN_PACK"/>
+    <field name="UP_FLOW" type="string" cname="上行流量" commonField="true" backName="UP_FLOW"/>
+    <field name="DOWN_FLOW" type="string" cname="下行流量" commonField="true" backName="DOWN_FLOW"/>
+    <field name="SITE_NAME_ID" type="string" cname="网站名称编号" commonField="true" backName="SITE_NAME_ID"/>
+    <field name="SITE_CHANNEL_ID" type="string" cname="网站频道编号" commonField="true" backName="SITE_CHANNEL_ID"/>
+    <field name="RES_IP" type="string" cname="资源IP地址" commonField="true" backName="RES_IP"/>
+    <field name="SITE_OPERATORS_ID" type="string" cname="资源归属运营商" commonField="true" backName="SITE_OPERATORS_ID"/>
+    <field name="CONT_CLASS_STR" type="string" cname="分类串" commonField="true" backName="CONT_CLASS_STR"/>
+    <field name="KEY_WORD_STR" type="string" cname="关键字串" commonField="true" backName="KEY_WORD_STR"/>
+    <field name="CONT_CLASS_FLAG" type="string" cname="分类标记" commonField="true" backName="CONT_CLASS_FLAG"/>
+    <field name="HOT_WORD_ID" type="string" cname="营销词编号" commonField="true" backName="HOT_WORD_ID"/>
+    <field name="CHARGING_ID" type="string" cname="计费标识" commonField="true" backName="CHARGING_ID"/>
+    <field name="C_SGSN_IP" type="string" cname="C_SGSN_IP" commonField="true" backName="C_SGSN_IP" />
+    <field name="C_GGSN_IP" type="string" cname="C_GGSN_IP" commonField="true" backName="C_GGSN_IP"/>
+    <field name="U_SGSN_IP" type="string" cname="U_SGSN_IP" commonField="true" backName="U_SGSN_IP"/>
+    <field name="U_GGSN_IP" type="string" cname="U_GGSN_IP" commonField="true" backName="U_GGSN_IP"/>
+    <field name="EX_TL_DOMAIN" type="string" cname="一级域名" commonField="true" backName="mainDomain" />
+    <field name="EX_COMP_DOMAIN" type="string" cname="完整域名" commonField="true" backName="fullDomain"/>
+    <field name="EX_SITE_ID" type="string" cname="增强后网站编号" commonField="true" backName="EX_SITE_ID"/>
+    <field name="EX_SITE_CATEGORY_ID" type="string" cname="增强后网站频道编号" commonField="true" backName="EX_SITE_CATEGORY_ID"/>
+    <field name="EX_CLASSIFY" type="string" cname="增强后内容分类串" commonField="true" backName="EX_CLASSIFY"/>
+    <field name="EX_NEED_CLASSIFY" type="string" cname="增强后内容分类标记" commonField="true" backName="EX_NEED_CLASSIFY"/>
+    <field name="EX_PROVINCE_ID" type="string" cname="省编码" commonField="true" backName="EX_PROVINCE_ID"/>
+    <field name="ACCE_URL" type="string" cname="访问URL" commonField="true" backName="detailURL"/>
+    <field name="FLOW" type="string" cname="流量" commonField="true" backName="flow"/>
+</model>
+
+
+

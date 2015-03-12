@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model modelId="GPRS" name="GRPS详单" process="jfProcess" table="dr_query">
+ 	<field index="9" name="DEST_START_TIME" type="string" cname="起始时间" commonField="true" escapeField="D1"/>
+</model>
+
+
+
+<!-- <field index="1" name="DEST_START_TIME" type="string" cname="起始时间" commonField="true" escapeField="D1"/>
+    <field index="2" name="DEST_DURATION" type="string" cname="总时长" commonField="true" escapeField="D2"/>
+    <field index="3" name="DEST_ROAM_TYPE" type="string"/>
+    <field index="4" name="DEST_CALL_TYPE" type="string"/>
+    <field index="5" name="DEST_OPP_NUMBER" type="string"/>
+    <field index="6" name="DEST_OPP_TYPE" type="string"/>
+    <field index="7" name="DEST_VPLMN" type="string" cname="使用地点" commonField="true" escapeField="D3"/>
+    <field index="8" name="DEST_SERVICE_TYPE" type="string" cname="业务类型或接入方式" commonField="true" escapeField="D4"/>
+    <field index="9" name="DEST_BASIC_CHARGE" type="string"/>
+    <field index="10" name="DEST_TOLL_CHARGE" type="string"/>
+    <field index="11" name="DEST_INFO_CHARGE" type="string"/>
+    <field index="12" name="DEST_ALL_CHARGE" type="string"  cname="通信费" commonField="true" escapeField="D5"/>
+    <field index="13" name="DEST_FREE" type="string"  cname="优惠项" commonField="true" escapeField="D6"/>
+    <field index="14" name="DEST_OPP_AREA_CODE" type="string"/>
+    <field index="15" name="DEST_LAC" type="string"/>
+    <field index="16" name="DEST_CELL" type="string"/>
+    <field index="17" name="DEST_APN" type="string" cname="网络标识" commonField="true" escapeField="D7"/>
+    <field index="18" name="DEST_SP_NAME" type="string"/>
+    <field index="19" name="DEST_SERVICE_CODE" type="string"/>
+    <field index="20" name="DEST_OPER_CODE" type="string"/>
+    <field index="21" name="DEST_OPER_NAME" type="string" cname="业务名称" commonField="true" escapeField="D8"/>
+    <field index="22" name="DEST_BILL_TYPE" type="string"/>
+    <field index="23" name="DEST_MONTH" type="string"/>
+    <field index="24" name="DEST_CDR_TYPE" type="string" cname="展示类型" commonField="true" escapeField="D9"/>
+    <field index="25" name="DEST_SP_CODE" type="string"/>
+    <field index="26" name="DEST_NET_TYPE" type="string"/>
+    <field index="27" name="DEST_CHARGE_DISC" type="string"/>
+    <field index="28" name="DEST_VOLUME" type="string" cname="总流量" commonField="true" escapeField="D10"/>
+    <field index="29" name="DEST_ORDER_MODE" type="string"/> -->

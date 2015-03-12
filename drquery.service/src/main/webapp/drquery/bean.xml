@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<bean id="localFieldEscape" class="com.asiainfo.billing.drquery.process.operation.fieldEscape.LocalFieldEscape" 
+		sourcePath="/source/escape" targetPath="/runtime/classes">
+		<template location="Template.conf">
+			<model id="${template.GPRS}" ref-model="GPRS.conf"/>
+		</template>
+	</bean>
+	<!--<bean id="commonSummaryRule" class="com.asiainfo.billing.drquery.process.operation.summary.summaryRule.impl.CommonSummaryRule" -->
+		<!--sourcePath="/source/summary" targetPath="/runtime/classes">-->
+		<!--<template location="Template.conf">-->
+			<!--<model id="${template.GPRS}" ref-model="GPRS.conf"/>-->
+		<!--</template>-->
+	<!--</bean>-->
+</configuration>
