@@ -1,0 +1,135 @@
+#redis config via Spring-data-redis
+redis.host=20.26.12.15
+redis.port=6379
+redis.timeout=30000
+#reids\u8d85\u65f6\u65f6\u95f4\uff0c\u6ce8\u610f\uff0c\u4ee5\u79d2\u4e3a\u5355\u4f4d\uff0c\u5f53\u503c\u4e3a-1\u65f6\uff0c\u4e0d\u8bbe\u5b9a\u8d85\u65f6\u65f6\u95f4
+redis.expiretime=30
+#\u53ef\u4ee5\u4ece\u5bf9\u8c61\u6c60\u4e2d\u53d6\u51fa\u7684\u5bf9\u8c61\u6700\u5927\u4e2a\u6570\uff0c\u4e3a0\u5219\u8868\u793a\u6ca1\u6709\u9650\u5236\uff0c\u9ed8\u8ba4\u4e3a8
+#The cap on the total number of object instances managed by the pool
+redis.pool.maxActive=200
+#\u5bf9\u8c61\u6c60\u4e2d\u5bf9\u8c61\u6700\u5927\u4e2a\u6570
+redis.pool.maxIdle=100
+#\u5bf9\u8c61\u6c60\u4e2d\u5bf9\u8c61\u6700\u5c0f\u4e2a\u6570
+redis.pool.minIdle=0
+#\u82e5\u5728\u5bf9\u8c61\u6c60\u7a7a\u65f6\u8c03\u7528borrowObject\u65b9\u6cd5\u7684\u884c\u4e3a\u88ab\u8bbe\u5b9a\u6210\u7b49\u5f85\uff0c\u6700\u591a\u7b49\u5f85\u591a\u5c11\u6beb\u79d2\u3002\u5982\u679c\u7b49\u5f85\u65f6\u95f4\u8d85\u8fc7\u4e86\u8fd9\u4e2a\u6570\u503c\uff0c\u5219\u4f1a\u629b\u51fa\u4e00\u4e2ajava.util.NoSuchElementException\u5f02\u5e38\u3002\u5982\u679c\u8fd9\u4e2a\u503c\u4e0d\u662f\u6b63\u6570\uff0c\u8868\u793a\u65e0\u9650\u671f\u7b49\u5f85\u3002 
+redis.pool.maxWait=100000
+redis.pool.testOnBorrow=false
+
+redis.mapSize=10000
+
+busiType=AI_MUSICINFO,AI_MMAPPINFO,UP_PRODUCT_ITEM,QRY_BASE_TYPE_DEF,ISMG_SP_INFO_DTL,SHIELD_INFO_DTL,PM_FREERES_DEF,GSM_INTL_PLMN_CODE,UP_SUBJECT,OWNPROD_INFO_DTL,OWNPROD_INFO_DTL_OPER,AI_DAILYDONGMAN,UP_OFFER_PRODUCT_ITEM,QRY_GAME_CONTENTS,ISMG_RATE
+
+AI_MUSICINFO.0=AI_MUSICINFO
+AI_MUSICINFO.0.username=aicbs
+AI_MUSICINFO.0.password=dbpasswd
+AI_MUSICINFO.0.driverClass=oracle.jdbc.OracleDriver
+AI_MUSICINFO.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+AI_MUSICINFO.0.sql=SELECT DISTINCT a.music_version AS "KEY",a.music_name AS "CONTENT_NAME" FROM aicbs.ai_musicinfo a
+
+
+AI_MMAPPINFO.0=AI_MMAPPINFO
+AI_MMAPPINFO.0.username=aicbs
+AI_MMAPPINFO.0.password=dbpasswd
+AI_MMAPPINFO.0.driverClass=oracle.jdbc.OracleDriver
+AI_MMAPPINFO.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+AI_MMAPPINFO.0.sql=SELECT DISTINCT a.CONTENT_ID AS "KEY",a.CONTENT_NAME AS "CONTENT_NAME" FROM aicbs.ai_mmappinfo a
+
+
+UP_PRODUCT_ITEM.0=UP_PRODUCT_ITEM
+UP_PRODUCT_ITEM.0.username=aicbs
+UP_PRODUCT_ITEM.0.password=dbpasswd
+UP_PRODUCT_ITEM.0.driverClass=oracle.jdbc.OracleDriver
+UP_PRODUCT_ITEM.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+UP_PRODUCT_ITEM.0.sql=SELECT distinct EXTEND_ID AS "KEY",NAME AS "NAME" FROM aicbs.up_product_item a WHERE  A.ITEM_TYPE='SRVC_SINGLE'
+
+
+QRY_BASE_TYPE_DEF.0=QRY_BASE_TYPE_DEF
+QRY_BASE_TYPE_DEF.0.username=aicbs
+QRY_BASE_TYPE_DEF.0.password=dbpasswd
+QRY_BASE_TYPE_DEF.0.driverClass=oracle.jdbc.OracleDriver
+QRY_BASE_TYPE_DEF.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+QRY_BASE_TYPE_DEF.0.sql=select distinct CODE_TYPE||'|'||CODE_ID AS "KEY", CODE_NAME AS "CODE_NAME" from aicbs.qry_base_type_def
+
+
+ISMG_SP_INFO_DTL.0=ISMG_SP_INFO_DTL
+ISMG_SP_INFO_DTL.0.username=aicbs
+ISMG_SP_INFO_DTL.0.password=dbpasswd
+ISMG_SP_INFO_DTL.0.driverClass=oracle.jdbc.OracleDriver
+ISMG_SP_INFO_DTL.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+ISMG_SP_INFO_DTL.0.sql=select distinct sp_code AS "KEY", TO_CHAR(VALID_DATE,'YYYYMMDDHH24MISS') AS "VALID_DATE", TO_CHAR(EXPIRE_DATE,'YYYYMMDDHH24MISS') AS "EXPIRE_DATE", SP_NAME AS "SP_NAME", SP_TYPE AS "SP_TYPE" from aicbs.ISMG_SP_INFO_DTL
+
+SHIELD_INFO_DTL.0=SHIELD_INFO_DTL
+SHIELD_INFO_DTL.0.username=aicbs
+SHIELD_INFO_DTL.0.password=dbpasswd
+SHIELD_INFO_DTL.0.driverClass=oracle.jdbc.OracleDriver
+SHIELD_INFO_DTL.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+SHIELD_INFO_DTL.0.sql=select bill_id1 AS "KEY", bill_id2 AS "OPP_NUMBER", to_char(valid_date,'yyyymmddhh24miss') AS "VALID_DATE", to_char(expire_date,'yyyymmddhh24miss') AS "EXPIRE_DATE" from aicbs.shield_info_dtl union select bill_id2 AS "KEY", bill_id1 AS "BILL_ID2", to_char(valid_date,'yyyymmddhh24miss') AS "VALID_DATE", to_char(expire_date,'yyyymmddhh24miss') AS "EXPIRE_DATE" from aicbs.shield_info_dtl
+
+
+PM_FREERES_DEF.0=PM_FREERES_DEF
+PM_FREERES_DEF.0.username=aicbs
+PM_FREERES_DEF.0.password=dbpasswd
+PM_FREERES_DEF.0.driverClass=oracle.jdbc.OracleDriver
+PM_FREERES_DEF.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+PM_FREERES_DEF.0.sql=select distinct PRODUCT_ITEM_ID AS "KEY", NAME AS "FREERES_NAME" , FREE_RES_TYPE AS "FREERES_TYPE"  from aicbs.pm_freeres_def
+
+
+GSM_INTL_PLMN_CODE.0=GSM_INTL_PLMN_CODE
+GSM_INTL_PLMN_CODE.0.username=aicbs
+GSM_INTL_PLMN_CODE.0.password=dbpasswd
+GSM_INTL_PLMN_CODE.0.driverClass=oracle.jdbc.OracleDriver
+GSM_INTL_PLMN_CODE.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+GSM_INTL_PLMN_CODE.0.sql=select distinct plmn_code AS "KEY", plmn_name AS "PLMN_NAME"  from  aicbs.GSM_INTL_PLMN_CODE
+
+UP_SUBJECT.0=UP_SUBJECT
+UP_SUBJECT.0.username=aicbs
+UP_SUBJECT.0.password=dbpasswd
+UP_SUBJECT.0.driverClass=oracle.jdbc.OracleDriver
+UP_SUBJECT.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+UP_SUBJECT.0.sql=select distinct ACC_CODE AS "KEY",ACC_NAME AS "ACC_NAME"  from  aicbs.up_subject
+
+OWNPROD_INFO_DTL.0=OWNPROD_INFO_DTL
+OWNPROD_INFO_DTL.0.username=aicbs
+OWNPROD_INFO_DTL.0.password=dbpasswd
+OWNPROD_INFO_DTL.0.driverClass=oracle.jdbc.OracleDriver
+OWNPROD_INFO_DTL.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+OWNPROD_INFO_DTL.0.sql=select distinct sp_code AS "KEY", OPERATOR_CODE AS "OPERATOR_CODE",  VALID_DATE AS "VALID_DATE", EXPIRE_DATE AS "EXPIRE_DATE", PROD_NAME AS "PROD_NAME" from aicbs.OWNPROD_INFO_DTL
+
+
+OWNPROD_INFO_DTL_OPER.0=OWNPROD_INFO_DTL_OPER
+OWNPROD_INFO_DTL_OPER.0.username=aicbs
+OWNPROD_INFO_DTL_OPER.0.password=dbpasswd
+OWNPROD_INFO_DTL_OPER.0.driverClass=oracle.jdbc.OracleDriver
+OWNPROD_INFO_DTL_OPER.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+OWNPROD_INFO_DTL_OPER.0.sql=select distinct sp_code||'|'|| OPERATOR_CODE  AS "KEY", VALID_DATE AS "VALID_DATE", EXPIRE_DATE AS "EXPIRE_DATE", PROD_NAME AS "PROD_NAME", OPER_TYPE AS "OPER_TYPE", OPERATOR_NAME AS "OPERATOR_NAME" from aicbs.OWNPROD_INFO_DTL
+
+
+AI_DAILYDONGMAN.0=AI_DAILYDONGMAN
+AI_DAILYDONGMAN.0.username=aicbs
+AI_DAILYDONGMAN.0.password=dbpasswd
+AI_DAILYDONGMAN.0.driverClass=oracle.jdbc.OracleDriver
+AI_DAILYDONGMAN.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+AI_DAILYDONGMAN.0.sql=select distinct CONTENT_ID AS "KEY", CONTENT_NAME AS "CONTENT_NAME",VALID_DATE AS "VALID_DATE", EXPIRE_DATE AS "EXPIRE_DATE"  from aicbs.ai_dailydongman
+
+UP_OFFER_PRODUCT_ITEM.0=UP_OFFER_PRODUCT_ITEM
+UP_OFFER_PRODUCT_ITEM.0.username=aicbs
+UP_OFFER_PRODUCT_ITEM.0.password=dbpasswd
+UP_OFFER_PRODUCT_ITEM.0.driverClass=oracle.jdbc.OracleDriver
+UP_OFFER_PRODUCT_ITEM.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+UP_OFFER_PRODUCT_ITEM.0.sql=select EXTEND_ID ,OFFER_PLAN_TYPE AS "PLAN_TYPE" from aicbs.UP_OFFER a, aicbs.UP_PRODUCT_ITEM b where a.offer_id = b.product_item_id and b.item_type = 'OFFER_PLAN' and b.del_flag = '1'
+
+QRY_GAME_CONTENTS.0=QRY_GAME_CONTENTS
+QRY_GAME_CONTENTS.0.username=aicbs
+QRY_GAME_CONTENTS.0.password=dbpasswd
+QRY_GAME_CONTENTS.0.driverClass=oracle.jdbc.OracleDriver
+QRY_GAME_CONTENTS.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+QRY_GAME_CONTENTS.0.sql=select distinct SP_CODE||'|'||GAME_ID AS "KEY", VALID_DATE AS "VALID_DATE", EXPIRE_DATE AS "EXPIRE_DATE",GAME_NAME AS "CONTENT_NAME" from aicbs.QRY_GAME_CONTENTS
+
+
+ISMG_RATE.0=ISMG_RATE
+ISMG_RATE.0.username=aicbs
+ISMG_RATE.0.password=dbpasswd
+ISMG_RATE.0.driverClass=oracle.jdbc.OracleDriver
+ISMG_RATE.0.url=jdbc:oracle:thin:@20.26.11.5:1521:CSHP02
+ISMG_RATE.0.sql=select distinct SP_ID||'|'||OPERATOR_CODE AS "KEY", TO_CHAR(VALID_DATE,'YYYYMMDDHH24MISS') AS "VALID_DATE", TO_CHAR(EXPIRE_DATE,'YYYYMMDDHH24MISS') AS "EXPIRE_DATE",OPERATOR_NAME AS "OPERATE_NAME" from aicbs.ISMG_RATE
+
