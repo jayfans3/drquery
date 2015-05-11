@@ -93,23 +93,7 @@
         </property>
     </bean>
 
-    <bean id="jfProcess" class="com.asiainfo.billing.drquery.process.core.process.DRNewJFCommonProcess">
-        <property name="fieldEscape">
-            <ref local="commonfieldEscape" />
-        </property>
-        <property name="dataSourceRoute">
-            <ref local="baseDataSourceRoute" />
-        </property>
-        <property name="distinct">
-            <ref local="commonDistinct" />
-        </property>
-        <property name="merge">
-            <ref local="commonMerge" />
-        </property>
-        <property name="summary">
-            <ref local="jfCommonSummary" />
-        </property>
-    </bean>
+
     <bean id="serviceLocator" class="com.asiainfo.billing.drquery.utils.ServiceLocator"/>
     <bean id="processFactory" class="com.asiainfo.billing.drquery.process.core.ProcessFactory">
         <property name="commProcessEntries">
@@ -129,6 +113,7 @@
             </bean>
         </property>
     </bean>
+    <!--
     <bean
         class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
@@ -137,7 +122,6 @@
             </list>
         </property>
     </bean>
-     
     <bean id="fieldEscapeDataJob"
               class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="AxisClient" />
@@ -148,7 +132,7 @@
         <property name="jobDetail" ref="fieldEscapeDataJob" />
         <property name="cronExpression" value="0 * * ? * * *" />
     </bean>
-
+    -->
     <bean id="cacheProvider"
               class="com.asiainfo.billing.drquery.cache.CacheProvider"/>
 
@@ -157,57 +141,13 @@
     <bean id="GPRSSRule" class="com.asiainfo.billing.drquery.process.operation.summary.summaryRule.impl.GPRSSummaryRule"/>
     <bean id="COMMONRule" class="com.asiainfo.billing.drquery.process.operation.summary.summaryRule.impl.CommonSummaryRule"/>
     -->
-    <!---->
-    <bean id="tssyDProcess" class="com.asiainfo.billing.drquery.process.core.process.TSSYDayProcess">
-        <property name="fieldEscape">
-            <ref local="commonfieldEscape" />
-        </property>
-        <property name="dataSourceRoute">
-            <ref local="baseDataSourceRoute" />
-        </property>
-        <property name="distinct">
-            <ref local="commonDistinct" />
-        </property>
-        <property name="merge">
-            <ref local="commonMerge" />
-        </property>
-        <property name="summary">
-            <ref local="jfCommonSummary" />
-        </property>
-    </bean>
-    <bean id="tssyHProcess" class="com.asiainfo.billing.drquery.process.core.process.TSSYHourProcess">
-        <property name="fieldEscape">
-            <ref local="commonfieldEscape" />
-        </property>
-        <property name="dataSourceRoute">
-            <ref local="baseDataSourceRoute" />
-        </property>
-        <property name="distinct">
-            <ref local="commonDistinct" />
-        </property>
-        <property name="merge">
-            <ref local="commonMerge" />
-        </property>
-        <property name="summary">
-            <ref local="jfCommonSummary" />
-        </property>
-    </bean>
     <bean id="gprsProcess" class="com.asiainfo.billing.drquery.process.core.process.GPRSFlowProcess">
-        <property name="fieldEscape">
-            <ref local="commonfieldEscape" />
-        </property>
         <property name="dataSourceRoute">
             <ref local="baseDataSourceRoute" />
         </property>
-        <property name="distinct">
-            <ref local="commonDistinct" />
-        </property>
-        <property name="merge">
-            <ref local="commonMerge" />
-        </property>
-        <property name="summary">
-            <ref local="jfCommonSummary" />
-        </property>
+    </bean>
+
+    <bean id="gprsUpdateProcess" class="com.asiainfo.billing.drquery.process.core.process.GPRSFlowUnpdateProcess">
         <property name="tablePrefix" value="${ocnosql.query.tablePrefix}" />
     </bean>
     <bean id="AxisClient" class="com.asiainfo.billing.drquery.axis2client.AxisClient"/>

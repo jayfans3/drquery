@@ -33,6 +33,7 @@ public class MetaModel implements Serializable{
 	private  Map<String, Field> queryFields;
 	
 	private String billType;
+    private boolean useCache;
 
     //每个接口对应的sql 键值对如：<F11,"select * from student">
     private Map<String,String> sql;
@@ -265,5 +266,13 @@ public class MetaModel implements Serializable{
 
     public void setDbNameToBackName(Map<String, String> dbNameToBackName) {
         this.dbNameToBackName = dbNameToBackName;
+    }
+
+    public boolean isUseCache() {
+        return useCache;
+    }
+
+    public void setUseCache(boolean useCache) {
+        this.useCache = useCache;
     }
 }

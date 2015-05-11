@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.asiainfo.billing.drquery.model.ViewModelReader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.asiainfo.billing.drquery.model.BusiModelReader;
 import com.asiainfo.billing.drquery.model.MetaModel;
 import com.asiainfo.billing.drquery.process.ProcessException;
 import com.asiainfo.billing.drquery.process.core.request.ProcessRequest;
@@ -72,9 +72,9 @@ public class ProcessFactory<T extends ProcessRequest> implements InitializingBea
 		}
 		isStart=false;
 		processEntries=new HashMap<String,BaseProcess<T>>();
-		BusiModelReader reader = new BusiModelReader();
+		ViewModelReader reader = new ViewModelReader();
 		reader.afterPropertiesSet();
-		Map<String, MetaModel> models = BusiModelReader.getMetaModels();
+		Map<String, MetaModel> models = ViewModelReader.getMetaModels();
 		for(Entry<String, MetaModel> meta:models.entrySet()){
 			String process = meta.getValue().getProcess();
 			BaseProcess bean = ServiceLocator.getInstance().getService(process,BaseProcess.class);

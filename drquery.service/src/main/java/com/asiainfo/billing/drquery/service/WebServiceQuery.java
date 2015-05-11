@@ -1,32 +1,37 @@
 package com.asiainfo.billing.drquery.service;
 
-import com.alibaba.druid.support.json.*;
-import com.alibaba.druid.support.json.JSONUtils;
-import com.asiainfo.billing.drquery.controller.reponse.*;
-import com.asiainfo.billing.drquery.exception.*;
-import com.asiainfo.billing.drquery.model.*;
-import com.asiainfo.billing.drquery.process.*;
-import com.asiainfo.billing.drquery.process.core.*;
-import com.asiainfo.billing.drquery.process.core.request.*;
-import com.asiainfo.billing.drquery.process.dto.*;
-import com.asiainfo.billing.drquery.process.dto.model.*;
-import com.asiainfo.billing.drquery.process.operation.*;
-import com.asiainfo.billing.drquery.utils.*;
-import com.google.common.util.concurrent.*;
-import net.sf.json.*;
-import net.sf.json.util.*;
-import org.apache.commons.collections.map.*;
-import org.apache.commons.lang.*;
-import org.apache.commons.logging.*;
-import org.apache.hadoop.hdfs.web.*;
-import org.codehaus.jackson.*;
-import org.codehaus.jackson.map.*;
-import org.springframework.context.*;
-import org.springframework.context.support.*;
-
-import java.io.*;
-import java.text.*;
+import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+import net.sf.json.JSONObject;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.codehaus.jackson.JsonEncoding;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import com.asiainfo.billing.drquery.controller.reponse.DataResponse;
+import com.asiainfo.billing.drquery.controller.reponse.FailResponse;
+import com.asiainfo.billing.drquery.exception.BusinessException;
+import com.asiainfo.billing.drquery.exception.ExceptionCode;
+import com.asiainfo.billing.drquery.exception.ExceptionContext;
+import com.asiainfo.billing.drquery.exception.ExceptionLogHandler;
+import com.asiainfo.billing.drquery.exception.ExceptionMessage;
+import com.asiainfo.billing.drquery.exception.IExceptionHandler;
+import com.asiainfo.billing.drquery.process.ProcessException;
+import com.asiainfo.billing.drquery.process.core.DRProcess;
+import com.asiainfo.billing.drquery.process.core.ProcessFactory;
+import com.asiainfo.billing.drquery.process.core.request.CommonDRProcessRequest;
+import com.asiainfo.billing.drquery.process.dto.BaseDTO;
+import com.asiainfo.billing.drquery.process.dto.DRProcessDTO;
+import com.asiainfo.billing.drquery.process.dto.model.ResMsg;
+import com.asiainfo.billing.drquery.process.operation.MonitorLog;
+import com.asiainfo.billing.drquery.utils.JsonUtils;
+import com.asiainfo.billing.drquery.utils.LogUtils;
+import com.asiainfo.billing.drquery.utils.ServiceLocator;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,14 +40,14 @@ import java.util.*;
  * Time: 上午9:57
  * To change this template use File | Settings | File Templates.
  */
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class WebServiceQuery {
 
     private static Log log = LogFactory.getLog(WebServiceQuery.class);
 	private static IExceptionHandler handler = new ExceptionLogHandler();
     private static final String ENCODING_TYPE="UTF-8";
-    private static final int RECORD_BYTES = 1000;//估设置单条记录转换出json的最大字节数，按照上网详单为最大记录
+    //private static final int RECORD_BYTES = 1000;//估设置单条记录转换出json的最大字节数，按照上网详单为最大记录
 
-    @SuppressWarnings("unchecked")
     private static ProcessFactory<CommonDRProcessRequest> processFactory = ServiceLocator.getInstance().
             getService("processFactory", ProcessFactory.class);
 
@@ -54,7 +59,8 @@ public class WebServiceQuery {
      * @param interfaceType  请求类型（如：F11,F12）
      * @return  结果以json字符串返回
      */
-	public static String query(String jsonRequest,String interfaceType){
+	
+	public static String query(String jsonRequest, String interfaceType){
 		BaseDTO dto = new DRProcessDTO();
 		boolean isSuccess = false;
         String resultJson;
@@ -62,7 +68,7 @@ public class WebServiceQuery {
         CommonDRProcessRequest request = new CommonDRProcessRequest();
         request.setInterfaceType(interfaceType);
 		DRProcess<CommonDRProcessRequest> process = null;
-        Map extendParams = new LinkedMap();
+        Map extendParams = new LinkedHashMap();
         try{
             Map<String,Object> jsonArgs = JsonUtils.parserToMap(jsonRequest);
             Object obj = jsonArgs.get("qryCond");
@@ -83,7 +89,7 @@ public class WebServiceQuery {
 		}finally{
             resultJson = transferBaseDTOtoJSON(dto,interfaceType);
 			long t2 = System.currentTimeMillis();
-            int statesStartIndex = resultJson.indexOf("stats");
+            int statesStartIndex = resultJson.lastIndexOf("stats");
             if(statesStartIndex >= 0){
                 if(resultJson.substring(statesStartIndex,statesStartIndex+14).contains("null")){
                     extendParams.put(MonitorLog.RESULT_STATS,"null");
@@ -98,7 +104,7 @@ public class WebServiceQuery {
             extendParams.put(MonitorLog.ITF_PARAM,jsonRequest);
             extendParams.put(MonitorLog.START_TIME,new SimpleDateFormat("yyyyMMddHHmmss").format(new Date(t1)));
             extendParams.put(MonitorLog.COST_TIME,t2 - t1);
-            extendParams.put(MonitorLog.DEAL_STATE,isSuccess==true?0:1);
+            extendParams.put(MonitorLog.IS_SUCCESS,isSuccess==true?0:1);
             extendParams.put(MonitorLog.REMARK,"暂无");
 			MonitorLog mlog = new MonitorLog(request,extendParams);
 			LogUtils.getMonitorLogger().info(mlog);
@@ -132,14 +138,17 @@ public class WebServiceQuery {
             json.putAll( new FailResponse(msg).toMap());
             retJsonStr = json.toString();
         }
-        log.info("retJsonStr = " + retJsonStr);
+        log.debug("retJsonStr = " + retJsonStr);
         if(interfaceType.trim().equalsIgnoreCase("F11") && dto.getResMsg().getRetCode().equals("0")){
+            if(retJsonStr.contains("15972002418")){
+               log.info("---------------15972002418---------retJsonStr = " + retJsonStr);
+            }
             retJsonStr = StringUtils.replace(retJsonStr,"\"stats\":","\"NOO\":");
             retJsonStr = StringUtils.replace(retJsonStr,"\"sums\":[","\"stats\":");
             int rIndex = retJsonStr.indexOf("]",retJsonStr.indexOf("stats"));
             retJsonStr = new StringBuffer(retJsonStr).replace(rIndex,rIndex+1,"").toString();
         }
-        log.info("replace retJsonStr = " + retJsonStr);
+        log.debug("replace retJsonStr = " + retJsonStr);
         return retJsonStr;
     }
 

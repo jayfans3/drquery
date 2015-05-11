@@ -18,4 +18,9 @@ public class Constants {
 	public final static String FLOW_FEE = "flowFee";
 	public final static String DISCOUNT_PLAN_CODE = "discountPlanCode";
 
+
+    public final static String SUM_DATA_INFO = "sumDataInfo";
+
+    public final static String SUM_STAT_INFO = "sumStatInfo";
+
 }

@@ -6,7 +6,7 @@
     <parent>
         <artifactId>drquery</artifactId>
         <groupId>com.asiainfo.billing</groupId>
-        <version>2.0-bj</version>
+        <version>2.0-qinghai</version>
     </parent>
     <artifactId>drquery.client</artifactId>
     <name>drquery.client</name>
@@ -58,13 +58,6 @@
             <version>1.8.3</version>
         </dependency>
         <dependency>
-			<groupId>com.ailk.oci</groupId>
-			<artifactId>ocnosql-client</artifactId>
-			<version>V01B06C01</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-        <dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
 			<version>2.4</version>
@@ -78,6 +71,11 @@
       <version>3.0</version>
       <type>jar</type>
      </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drquery.datasource</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

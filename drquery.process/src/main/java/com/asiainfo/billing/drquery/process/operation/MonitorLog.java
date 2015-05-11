@@ -1,11 +1,10 @@
 package com.asiainfo.billing.drquery.process.operation;
 
-import java.util.*;
-
 import com.asiainfo.billing.drquery.process.core.request.CommonDRProcessRequest;
-import com.asiainfo.billing.drquery.utils.DateUtil;
-import com.google.common.util.concurrent.*;
-import org.apache.commons.collections.map.*;
+import org.apache.commons.collections.map.LinkedMap;
+
+import java.util.Iterator;
+import java.util.Map;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class MonitorLog {
@@ -74,7 +73,7 @@ public class MonitorLog {
     public static final String ITF_PARAM = "ITF_PARAM";//接口参数
     public static final String START_TIME = "START_TIME"; //开始时间  yyyymmddHHMMSS
     public static final String COST_TIME = "COST_TIME";//接口耗时 单位：毫秒
-    public static final String DEAL_STATE = "DEAL_STATE";//执行状态 1、失败；0：成功
+    public static final String IS_SUCCESS = "IS_SUCCESS";//执行状态 1、失败；0：成功
     public static final String RESULT_STATS = "RESULT_STATS";//结果统计信息
     public static final String REMARK = "REMARK"; //备注
     public static final String CACHE_FLAF = "CACHE_FLAF";//是否从cache查询  1、是；0、否

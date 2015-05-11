@@ -2,6 +2,7 @@ package com.asiainfo.billing.drquery.utils;
 
 import org.apache.commons.lang3.time.*;
 
+import java.math.*;
 import java.text.*;
 import java.util.*;
 
@@ -219,12 +220,105 @@ public final class DateUtil {
         return iMonth;
     }
 
-    public static void main(String[] args) {
-       Date date1 = new Date(2008,3,24);
-       Date date2 = new Date(2009,4,5);
-       int v = getMonths(date1,date2);
-       System.out.println("interval="+v);
+    /**
+     * requrie yyyyMMddHHmmss
+     * @param time
+     * @throws Exception
+     */
+    public static void isTimeLegal(String time) {
+        String msg = "";
+
+        if (time == null || time.length() != 14) {
+            msg = "时间:" + time + " 长度不符合14位要求的长度 ,请参照yyyyMMddHHmmss";
+            throw new IllegalArgumentException(msg);
+        }
+        String year = time.substring(0, 4);
+        String month = time.substring(4, 6);
+        String day = time.substring(6, 8);
+        String hour = time.substring(8, 10);
+        String minute = time.substring(10, 12);
+        String second = time.substring(12, 14);
+        int sy = 0;
+        int sm =0;
+        int sd = 0;
+        int shour = 0;
+        int sminute = 0;
+        int ssecond = 0;
+        try {
+            sy = Integer.parseInt(year);
+            sm = Integer.parseInt(month);
+            sd = Integer.parseInt(day);
+            shour = Integer.parseInt(hour);
+            sminute = Integer.parseInt(minute);
+            ssecond = Integer.parseInt(second);
+        } catch (Exception e) {
+            msg = "输入的时间不能包含字母";
+            throw new IllegalArgumentException(msg);
+        }
+        int maxDays = 31;
+        if (sm > 12 || sm < 1) {
+            msg = "您输入的月份不在规定范围内";
+            throw new IllegalArgumentException(msg);
+        } else if (sm == 4 || sm == 6 || sm == 9 || sm == 11) {
+            maxDays = 30;
+        } else if (sm == 2) {
+            if (sy % 4 == 0 && sy % 100 != 0)
+                maxDays = 29;
+            else if (sy % 100 == 0 && sy % 400 == 0)
+                maxDays = 29;
+            else
+                maxDays = 28;
+        }
+        if (sd < 1 || sd > maxDays) {
+            msg = "您输入的日期不在规定范围内";
+            throw new IllegalArgumentException(msg);
+        }
+        if (shour < 0 || shour > 23) {
+            msg = "您输入的小时不在规定范围内";
+            throw new IllegalArgumentException(msg);
+        }
+        if (sminute < 0 || sminute > 59) {
+            msg = "您输入的分钟不在规定范围内";
+            throw new IllegalArgumentException(msg);
+        }
+        if (ssecond < 0 || ssecond > 59) {
+            msg = "您输入的秒不在规定范围内";
+            throw new IllegalArgumentException(msg);
+        }
     }
 
 
+    public static List<String> getMonthsBetween(String startTime, String endTime, String format) {
+        List<String> monthsList = new ArrayList<String>();
+        DateFormat df = new SimpleDateFormat(format);
+        int interValMonths = 0;
+        try {
+            interValMonths = DateUtil.getMonths(df.parse(startTime), df.parse(endTime));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        int year = Integer.parseInt(startTime.substring(0, 4));
+        int month = Integer.parseInt(startTime.substring(4, 6));
+        for (int i = 0; i <= interValMonths; i++) {
+            if (month > 12) {
+                year = year + 1;
+                month = 1;
+            }
+            String fillMonth = String.valueOf(month);
+            if ((month) < 10) {
+                fillMonth = "0" + month;
+            }
+            month = month + 1;
+            monthsList.add(year + fillMonth);
+        }
+        return monthsList;
+    }
+
+
+    public static void main(String[] args) {
+//       Date date1 = new Date(2008,3,24);
+//       Date date2 = new Date(2009,4,5);
+//       int v = getMonths(date1,date2);
+//       System.out.println("interval="+v);
+    }
 }

@@ -1,3 +1,0 @@
-2013-12-25 15:12:28 [main][com.asiainfo.billing.drescaping.DBBean][57]-[ERROR] com.ibm.db2.jcc.a.ln: [jcc][t4][2013][11249][3.52.95] Connection authorization failure occurred.  Reason: User ID or Password invalid. ERRORCODE=-4214, SQLSTATE=28000
-2013-12-25 15:12:28 [main][monitor][58]-[ERROR] 10.4.52.108,Create Connection [jdbc:db2://10.4.52.87:50000/TASDB] failed
-2013-12-25 15:12:28 [main][com.asiainfo.billing.drescaping.DBBean][61]-[ERROR] Fail to create JDBC Connection from [jdbc:db2://10.4.52.87:50000/TASDB].

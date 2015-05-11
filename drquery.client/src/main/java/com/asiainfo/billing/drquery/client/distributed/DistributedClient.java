@@ -34,8 +34,6 @@ public class DistributedClient {
 	private ZooKeeper zk;
 	private DistributedLock lock;
 	private CountDownLatch latch = new CountDownLatch(1); 
-	private String hosts;
-	private int session_timeout;
 	
 	public DistributedClient(String hosts, String root, String lockName, int session_timeout) throws IOException{
 		connect(hosts, session_timeout);
@@ -43,8 +41,7 @@ public class DistributedClient {
 	}
 	
 	public void connect(String hosts, int session_timeout) throws IOException {
-		this.hosts=hosts;
-		this.session_timeout=session_timeout;
+		
 		zk = new ZooKeeper(hosts, session_timeout, new Watcher() {
 			@Override
 			public void process(WatchedEvent event) {
@@ -60,15 +57,7 @@ public class DistributedClient {
 		}
 	}
 	
-	public void reconnect() throws IOException {
-		connect(hosts,session_timeout);
-	}
 	
-	public boolean isreconnecting() throws IOException {
-		if(zk!=null&&zk.getState().equals(zk.getState().CONNECTING.toString())){
-			return true;
-		}else {return false;}
-	}
 	public DistributedLock getLock() {
 		return this.lock;
 	}

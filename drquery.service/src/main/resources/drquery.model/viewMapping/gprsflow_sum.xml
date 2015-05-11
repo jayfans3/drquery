@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model modelId="GPRSFLOW_SUM_VIEW" name="GRPS详单汇总" process="gprsProcess" table="GPRS" useCache="false">
+    <!--<field name="timeRange" type="string" cname="时间段" commonField="true" escapeField="S1"/>-->
+    <!--<field name="termName" type="string" cname="终端名称" commonField="true" escapeField="S2"/>-->
+    <!--<field name="groupValue" type="string" cname="APP ID" commonField="true" escapeField="S3"/>-->
+    <!--<field name="groupValueName" type="string" cname="应用名称" commonField="true" escapeField="S4"/>-->
+    <!--<field name="groupTotalFlow" type="string" cname="此应用对应的汇总流量" commonField="true" escapeField="S5"/>-->
+    <!--<field name="groupRecordCount" type="string" cname="此应用对应的记录条数" commonField="true" escapeField="S6"/>-->
+    <!--<field name="appFlag" type="string" cname="" commonField="true" escapeField="S7"/>-->
+</model>

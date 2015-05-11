@@ -18,7 +18,6 @@ import org.apache.axis2.rpc.client.RPCServiceClient;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.zookeeper.KeeperException;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -37,8 +36,7 @@ public class AxisClient {
 	private  Log log = LogFactory.getLog(AxisClient.class);
 	boolean processing = false;
 	
-	public AxisClient() {
-	String resourceName = "client-runtime.properties";
+	public AxisClient() { String resourceName = "client-runtime.properties";
     String quorum = "hbase.zookeeper.quorum";
     String clientport = "hbase.zookeeper.property.clientPort";
     String[] urls = PropertiesUtil.getProperty(resourceName, quorum).split(",");
@@ -56,7 +54,7 @@ public class AxisClient {
       this.log.info("连接zookeeper异常:oc1", e);
     }
   }
-	static { 
+	static {
 		exception.put("0", "成功");
 		exception.put("-1000", "系统升级暂停服务");
 		exception.put("-1001", "系统来源认证信息验证不通过");
@@ -279,19 +277,7 @@ public class AxisClient {
 		client.setDataForPersistentZNode("/DRQuery/cmod/lastProcessTime",puttime.getBytes());
 		
 		} catch (ZookeeperException e) {
-			if (e.getCause() != null && (e.getCause() instanceof KeeperException.SessionExpiredException || e.getCause() instanceof KeeperException.ConnectionLossException)) {
-				try {
-					client.getZK().close();
-				} catch (InterruptedException e1) {
-					log.error(e);
-				}
-				try {
-					if(!client.isreconnecting()){
-					client.reconnect();}
-				} catch (IOException e1) {
-					log.error("操作异常被中断。the opr interrupt .e=", e1);
-				}
-			}
+			log.error("zookeeper连接失败", e);
 		} catch (Exception e1) {
 			log.error("操作异常被中断。the opr interrupt .e=", e1);
 		} finally{
@@ -323,7 +309,7 @@ public class AxisClient {
 //			流量消费行为日志接口（DATA_CB_LOG）
 			a[6]="";//详单类型 填空
 //		  	a[7]=zkdata+"-"+puttime;
-		  	a[7]="20140115214900"+"-"+"20140115215000";
+		  	a[7]="20131001000000"+"-"+"20131002005900";
 			a[8]="BI";//渠道
 			a[9]=AxisClient.sdf2.format(new Date());//19位系统时间?
 			a[10]="BI";//操作员工号

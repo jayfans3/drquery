@@ -42,6 +42,14 @@ public class ResMsg {
 	public void setErrorCode(String errorCode) {
 		this.errorCode = errorCode;
 	}
+
+    public static ResMsg buildSuccess() {
+        ResMsg msg = new ResMsg(); //返回给上层的日志信息
+        msg.setRetCode("0");
+        msg.setErrorMsg("查询成功");
+        msg.setHint("查询成功");
+        return msg;
+    }
 	
 	
 }

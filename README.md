@@ -1,4 +1,0 @@
-# drquery
-
-
-peiking

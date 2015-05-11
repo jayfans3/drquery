@@ -28,7 +28,6 @@
 	<!-- 压缩算法 -->
 	<!--  <bean id="hbaseCompress" class="com.ailk.ocnosql.core.compress.impl.HbaseCompressImpl" />
 	<bean class="com.ailk.ocnosql.core.config.OCNoSqlConfiguration"/>-->
-	<bean id="hbaseQuery" class="com.ailk.oci.ocnosql.client.spi.ClientAdaptor"/>
 	<!-- 数据源连接定义 -->
 	<bean id="ocnosqlConnectionholder"
 		class="com.asiainfo.billing.drquery.datasource.ocnosql.OCNoSqlConnectionHolder"

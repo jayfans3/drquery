@@ -21,7 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStreamReader;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,55 +36,34 @@ import java.util.Map;
 public class CommonController extends BaseController {
 	private static Log log = LogFactory.getLog(CommonController.class);
 
-    private static final String ENCODING_TYPE="UTF-8";
-    private static final String CONTENT_TYPE="text/plain;charset=UTF-8";
+    private static final String ENCODING_TYPE = "UTF-8";
+    private static final String CONTENT_TYPE = "text/plain;charset=UTF-8";
     private static final int RECORD_BYTES = 1000;//估设置单条记录转换出json的最大字节数，按照上网详单为最大记录
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView postQueryDetailRecord(HttpServletRequest req,
-			HttpServletResponse resp) {
+	public ModelAndView postQueryDetailRecord(HttpServletRequest req, HttpServletResponse resp) {
 		
 		return queryDetailRecord(req, resp);
 	}
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView queryDetailRecord(HttpServletRequest req,
-			HttpServletResponse resp) {
+	public ModelAndView queryDetailRecord(HttpServletRequest req, HttpServletResponse resp) {
 
 		CommonDRProcessRequest request = new CommonDRProcessRequest();
-		request.setBillId(req.getParameter("mobile"));
-        String startTime = req.getParameter("startTime");
-        String endTime = req.getParameter("endTime");
-        String date = req.getParameter("date");
-        if(date != null && !date.equals("")){
-          if(startTime == null || startTime.equals("")) {
-             if (endTime ==null ||endTime.equals("")){ //如果查询是按天查询，则将开始时间和结束时间都设置为这一天
-                startTime = date;
-                endTime = date;
-             }
-           }
-        }
-        request.setFromDate(startTime);
-		request.setThruDate(endTime);
-		request.setPageIndex(NumberUtils.parseInt(req.getParameter("pageIndex")));
-		request.setPageSize(NumberUtils.parseInt(req.getParameter("pageSize")));
-		request.setInterfaceType(req.getParameter("interfaceType"));
-		
-		request.setSortName(req.getParameter("columnName"));
-		request.setSortDir(req.getParameter("orderFlag"));
 
-        //增加应用编码参数
-        request.setAppCode(req.getParameter("appCode"));
-        request.setRecordCode(req.getParameter("recordCode"));
+        request.setJsonArgsStr(bindParams(req));
+        request.setInterfaceType(req.getParameter("interfaceType"));
 
         ServletOutputStream sos = null;
-        Map<String,Object> retMap = new HashMap<String, Object>();
+        Map<String, Object> retMap = new HashMap<String, Object>();
         String retJsonStr = "";
 		try {
             resp.setContentType(CONTENT_TYPE);
             sos = resp.getOutputStream();
-			BaseDTO dto = Query.query(request);
+            BaseDTO dto = null;
+            dto = Query.query(request);
+
 			ResMsg msg = dto.getResMsg();
 			if("0".equals(msg.getRetCode())) {
                 //return new ModelAndView("/common",new DataResponse(dto.getReplyDisInfo(),msg,dto.getStatus(),dto.getSums()).toMap());
@@ -107,7 +89,7 @@ public class CommonController extends BaseController {
                 om.writeValue(jsonGenerator, retMap);//map to json
                 retJsonStr = new String(baos.toByteArray(),ENCODING_TYPE);
                 String encryptStr = EncryptJsonStringUtil.encrypt(retJsonStr);
-                log.info("encryptStr = " + encryptStr.getBytes(ENCODING_TYPE));
+                //log.info("encryptStr = " + encryptStr.getBytes(ENCODING_TYPE));
                 sos.write(encryptStr.getBytes(ENCODING_TYPE));
                 if(baos!=null)
                    baos.close();
@@ -119,6 +101,18 @@ public class CommonController extends BaseController {
         }
         return null;
 	}
+
+
+    public Map<String, String> bindParams(HttpServletRequest req) {
+        Map<String, String> params = new HashMap<String, String>();
+        Enumeration<String> en = req.getParameterNames();
+        while(en.hasMoreElements()) {
+            String key = en.nextElement();
+            params.put(key, req.getParameter(key));
+        }
+
+        return params;
+    }
 
 
 }

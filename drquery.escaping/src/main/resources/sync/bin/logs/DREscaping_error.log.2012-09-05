@@ -1,6 +1,0 @@
-2012-09-12 17:40:02 [main][com.asiainfo.billing.drescaping.DBExtractBean][72]-[ERROR] java.sql.SQLException: ORA-00923: FROM keyword not found where expected
- sql [select distinct sp_code AS "KEY", VALID_DATE AS "VALID_DATE", EXPIRE_DATE AS "EXPIRE_DATE", PROD_NAME AS "PROD_NAME"aicbs.OWNPROD_INFO_DTL]
-2012-09-12 17:40:02 [main][monitor][73]-[ERROR] 20.26.12.15,Query DB failed. sql [select distinct sp_code AS "KEY", VALID_DATE AS "VALID_DATE", EXPIRE_DATE AS "EXPIRE_DATE", PROD_NAME AS "PROD_NAME"aicbs.OWNPROD_INFO_DTL]
-2012-09-12 17:40:59 [main][com.asiainfo.billing.drescaping.DBExtractBean][72]-[ERROR] java.sql.SQLException: ORA-00942: table or view does not exist
- sql [select distinct sp_code AS "KEY", VALID_DATE AS "VALID_DATE", EXPIRE_DATE AS "EXPIRE_DATE", PROD_NAME AS "PROD_NAME" from aicbs.OWNPROD_INFO_DTL_OPER]
-2012-09-12 17:40:59 [main][monitor][73]-[ERROR] 20.26.12.15,Query DB failed. sql [select distinct sp_code AS "KEY", VALID_DATE AS "VALID_DATE", EXPIRE_DATE AS "EXPIRE_DATE", PROD_NAME AS "PROD_NAME" from aicbs.OWNPROD_INFO_DTL_OPER]

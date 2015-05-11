@@ -5,6 +5,7 @@ package com.asiainfo.billing.drquery.axis2server;
 
 import net.sf.json.JSONObject;
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.asiainfo.billing.drquery.service.WebServiceQuery;
 
 /**
@@ -31,8 +32,7 @@ public class Axis2Server extends Axis2ServerAdaptor {
      * 数据提供方记录数据接收方的查询请求。记录信息包含有：查询入参参数（见第2.1.2章节“入参参数列表”）、查询请求时间、查询返回时间、查询结果状态、总返回条数、	分页返回条数。
      */
 	public String getDimensionSummary(String json){
-		JSONObject jo=JSONObject.fromObject(json);
-//		JSONObject joo=jo.getJSONObject("qryCond");
+		JSONObject jo = JSONObject.fromObject(json);
 		String rs=WebServiceQuery.query(jo.toString(), "F11");
 //		String jsonStr = "{\n" +
 //        "    \"qryId\": \"1111111122\",\n" +
