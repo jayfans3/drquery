@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fieldEscapes>
-    <fieldEscape escapeFieldCode="K1" type="local" localMethod="DEST_GPRS_K1"/>
+    <fieldEscape escapeFieldCode="S1" type="local" localMethod="DEST_GPRS_S1"/>
+    <fieldEscape escapeFieldCode="S2" type="local" localMethod="DEST_GPRS_S2"/>
+    <fieldEscape escapeFieldCode="S3" type="local" localMethod="DEST_GPRS_S3"/>
+    <fieldEscape escapeFieldCode="S4" type="local" localMethod="DEST_GPRS_S4"/>
+    <fieldEscape escapeFieldCode="S5" type="local" localMethod="DEST_GPRS_S5"/>
+    <fieldEscape escapeFieldCode="S6" type="local" localMethod="DEST_GPRS_S6"/>
+    <fieldEscape escapeFieldCode="S7" type="local" localMethod="DEST_GPRS_S7"/>
 
+    <fieldEscape escapeFieldCode="D1" type="local" localMethod="DEST_GPRS_D1"/>
+    <fieldEscape escapeFieldCode="D2" type="local" localMethod="DEST_GPRS_D2"/>
+    <fieldEscape escapeFieldCode="D3" type="local" localMethod="DEST_GPRS_D3"/>
+    <fieldEscape escapeFieldCode="D4" type="local" localMethod="DEST_GPRS_D4"/>
+    <fieldEscape escapeFieldCode="D5" type="local" localMethod="DEST_GPRS_D5"/>
+    <fieldEscape escapeFieldCode="D6" type="local" localMethod="DEST_GPRS_D6"/>
+
+    <fieldEscape escapeFieldCode="K1" type="local" localMethod="DEST_GPRS_K1"/>
+    <fieldEscape escapeFieldCode="K2" type="local" localMethod="DEST_GPRS_K2"/>
+    <fieldEscape escapeFieldCode="K3" type="local" localMethod="DEST_GPRS_K3"/>
+    <fieldEscape escapeFieldCode="K4" type="local" localMethod="DEST_GPRS_K4"/>
+    <fieldEscape escapeFieldCode="K5" type="local" localMethod="DEST_GPRS_K5"/>
+    <fieldEscape escapeFieldCode="K6" type="local" localMethod="DEST_GPRS_K6"/>
 </fieldEscapes>

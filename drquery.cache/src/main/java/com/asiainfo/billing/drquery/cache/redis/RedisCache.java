@@ -12,12 +12,11 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -41,6 +40,11 @@ public class RedisCache  implements ICache,InitializingBean {
 		this.redisTemplate = redisTemplate;
 	}
 
+	public RedisTemplate<String, Object> getRedisTemplate() {
+		return redisTemplate;
+	}
+
+
 	private long timeout=-1;
 	public void setTimeout(long timeout) {
 		this.timeout = timeout;
@@ -55,6 +59,7 @@ public class RedisCache  implements ICache,InitializingBean {
 				handlerException(e);
 			}
     	}
+        redisTemplate.opsForHash().entries("");
     }
     
     private void expire(String key, long timeout){
@@ -109,7 +114,7 @@ public class RedisCache  implements ICache,InitializingBean {
 		Map<String, Object> target = new HashMap<String, Object>();
 		target.putAll(value);
 		Map<String,Object> metaMapData = new HashMap<String,Object>();
-		metaMapData.put(key+"|"+(isTimeout == true ? timeout : -1) ,target);
+		metaMapData.put(key+"^|^"+(isTimeout == true ? timeout : -1) ,target);
 		if(cacheKeys.contains(key)){
 			if(log.isDebugEnabled()){
 				log.debug("Input cache key["+key+"] contain cacheKeys,so needn't set in mapQueue");
@@ -163,7 +168,7 @@ public class RedisCache  implements ICache,InitializingBean {
 			index++;
 		}
 		HashMap<String,Object> metaMapData = new HashMap<String,Object>();
-		metaMapData.put(key+"|"+(isTimeout == true ? timeout : -1),map);
+		metaMapData.put(key+"^|^"+(isTimeout == true ? timeout : -1),map);
 		if(cacheKeys.contains(key)){
 			if(log.isDebugEnabled()){
 				log.debug("Input cache key["+key+"] contain cacheKeys,so needn't set in mapQueue");
@@ -298,7 +303,7 @@ public class RedisCache  implements ICache,InitializingBean {
 				if(log.isDebugEnabled()){
 					log.debug("insert cache key:"+entry.getKey());
 				}
-				String[] keys=StringUtils.split(entry.getKey(),"|");
+				String[] keys=StringUtils.splitByWholeSeparator(entry.getKey(),"^|^");
 				String key = keys[0];
 				String timeout= keys[1];
 				Map<Object,Object> value = (Map<Object, Object>) entry.getValue();
@@ -334,6 +339,34 @@ public class RedisCache  implements ICache,InitializingBean {
 		t2.setDaemon(true);
 		t2.start();
 	}
-	
-	
+
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        if(args.length < 3) {
+            System.err.println("usage: <hostname> <port> <table> [<key>]");
+        }
+        RedisTemplate redisTemp = new RedisTemplate();
+        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+        jedisConnectionFactory.setHostName(args[0]);
+        jedisConnectionFactory.setPort(Integer.parseInt(args[1]));
+        jedisConnectionFactory.afterPropertiesSet();
+        redisTemp.setConnectionFactory(jedisConnectionFactory);
+        redisTemp.afterPropertiesSet();
+        if(args.length == 3) {
+            Map<Object, Object> kvs = redisTemp.opsForHash().entries(args[2]);
+            for(Entry<Object, Object> entry : kvs.entrySet()) {
+                String key = (String) entry.getKey();
+                Object val = entry.getValue();
+                System.out.println(key + ": " + val);
+            }
+        } else {
+            Object val = redisTemp.opsForHash().get(args[2], args[3]);
+            System.out.println(val);
+        }
+
+    }
+
 }

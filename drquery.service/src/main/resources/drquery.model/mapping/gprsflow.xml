@@ -4,9 +4,9 @@
     <field name="ROW_NUM" type="string" backName="ROW_NUM"/>
     <field name="PHONE_NO" type="string" backName="phoneNo"/>
     <field name="APN_ID" type="string" backName="APN_ID"/>
-    <field name="ACCESS_MODE_ID" type="string" backName="ACCESS_MODE_ID"/>
+    <field name="ACCESS_MODE_ID" type="string" backName="accessModeName"/>
     <field name="TERM_TYPE_ID" type="string" backName="termModeName"/>
-    <field name="TERM_MANUFACTURER_ID" type="string" backName="TERM_MANUFACTURER_ID"/>
+    <field name="TERM_MANUF_ID" type="string" backName="termManufName"/>
     <field name="TERM_BRAND_ID" type="string" backName="TERM_BRAND_ID" />
     <field name="TERM_MODEL_ID" type="string" backName="TERM_MODEL_ID"/>
     <field name="TERM_OS" type="string" backName="TERM_OS"/>
@@ -17,8 +17,8 @@
     <field name="LOGIC_AREA_SUBTYPE_ID" type="string" backName="LOGIC_AREA_SUBTYPE_ID"/>
     <field name="LOGIC_AREA_TYPE_ID" type="string" backName="LOGIC_AREA_TYPE_ID"/>
     <field name="LOGIC_AREA_NAME" type="string" backName="LOGIC_AREA_NAME"/>
-    <field name="LAC" type="string" backName="LAC"/>
-    <field name="CI" type="string" backName="CI"/>
+    <field name="LAC" type="string" backName="lac"/>
+    <field name="CI" type="string" backName="ci"/>
     <field name="LOAD_PROTOCOL_ID" type="string" backName="LOAD_PROTOCOL_ID"/>
     <field name="APP_PROTOCOL_ID" type="string" backName="APP_PROTOCOL_ID"/>
     <field name="BUSI_ID" type="string" backName="BUSI_ID"/>
@@ -28,8 +28,10 @@
     <field name="START_TIME" type="string" backName="startTime"/>
     <field name="UP_PACK" type="string" backName="UP_PACK"/>
     <field name="DOWN_PACK" type="string" backName="DOWN_PACK"/>
-    <field name="FLOW" type="string" backName="flow"/>
-    <field name="SITE_NAME_ID" type="string" backName="SITE_NAME_ID"/>
+    <field name="UPFLOW" type="string" cname="上行流量" backName="upFlow"/>
+    <field name="DOWNFLOW" type="string" cname="下行流量" backName="downFlow"/>
+    <field name="ALIASFLOW" type="string" backName="flow"/>
+    <field name="SITE_NAME_ID" type="string" backName="siteName"/>
     <field name="SITE_CHANNEL_ID" type="string" backName="SITE_CHANNEL_ID"/>
     <field name="RES_IP" type="string" backName="RES_IP"/>
     <field name="SITE_OPERATORS_ID" type="string" backName="SITE_OPERATORS_ID"/>

@@ -78,20 +78,33 @@ public abstract class DRProcessRequest implements ProcessRequest{
 	}
 
 	public String generateCacheKey() {
-        if(jsonArgsStr == null || jsonArgsStr.isEmpty()) return null;
-        StringBuffer buf = new StringBuffer();
-        if(interfaceType.trim().equalsIgnoreCase("F12")){
-           buf.append(jsonArgsStr.get("phoneNo")).append(jsonArgsStr.get("startTime")).append(jsonArgsStr.get("endTime")).
-                   append(jsonArgsStr.get("appId")).append(jsonArgsStr.get("mainDomain")).
-                   append(jsonArgsStr.get("orderColumnCode")).append(jsonArgsStr.get("orderFlag"));
+        if(jsonArgsStr == null || jsonArgsStr.isEmpty()){
+          return null;
         }
-		return buf.toString();
+        StringBuffer buf = new StringBuffer();
+        buf.append(interfaceType).append("|");
+        if(interfaceType.trim().equalsIgnoreCase("F3") || interfaceType.trim().equalsIgnoreCase("F4") || interfaceType.trim().equalsIgnoreCase("F5")){
+            buf.append(jsonArgsStr.get("phoneNo")).append("|").
+               append(jsonArgsStr.get("startDate")).append("|").
+               append(jsonArgsStr.get("endDate")).append("|");
+        } else if("F6".equalsIgnoreCase(interfaceType)){
+            buf.append(jsonArgsStr.get("phoneNo")).append("|").
+                    append(jsonArgsStr.get("startDate")).append("|").
+                    append(jsonArgsStr.get("endDate")).append("|").append(jsonArgsStr.get("offset"));
+        } else if("F7".equalsIgnoreCase(interfaceType)){
+            buf.append(jsonArgsStr.get("phoneNo")).append("|").
+                    append(jsonArgsStr.get("dataDate")).append("|").
+                    append(jsonArgsStr.get("startTime")).append("|").
+                    append(jsonArgsStr.get("chargingId")).append("|").append(jsonArgsStr.get("offset"));
+        } else if("F8".equalsIgnoreCase(interfaceType)){
+            buf.append(jsonArgsStr.get("phoneNo")).append("|").
+                    append(jsonArgsStr.get("dataTime")).append("|").append(jsonArgsStr.get("chargingId")).append("|").append(jsonArgsStr.get("startTime")).append("|").
+                    append(jsonArgsStr.get("busiId")).append("|").
+                    append(jsonArgsStr.get("offset"));
+        }
+        return buf.toString();
 	}
-	
-	public String generateGlobalCacheKey(){
-		return "globalInfo:" + generateCacheKey();
-	}
-	
+
 	public String getConvertBillType(){
 		return null;
 	}

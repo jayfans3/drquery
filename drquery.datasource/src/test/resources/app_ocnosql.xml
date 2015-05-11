@@ -21,7 +21,6 @@
 		<property name="maxWait" value="${gbase.pool.maxWait}" />
 		<property name="testOnBorrow" value="${gbase.pool.testOnBorrow}" />
 	</bean>
-	<bean id="hbaseCompress" class="com.ailk.ocnosql.core.compress.impl.HbaseCompressImpl" />
 	<bean id="ocnosqlConnectionholder"
 		class="com.asiainfo.billing.drquery.datasource.ocnosql.OCNoSqlConnectionHolder" scope="prototype">
 	</bean>

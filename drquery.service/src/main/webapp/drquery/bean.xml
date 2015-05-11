@@ -9,7 +9,7 @@
 	<!--<bean id="commonSummaryRule" class="com.asiainfo.billing.drquery.process.operation.summary.summaryRule.impl.CommonSummaryRule" -->
 		<!--sourcePath="/source/summary" targetPath="/runtime/classes">-->
 		<!--<template location="Template.conf">-->
-			<!--<model id="${template.GPRS}" ref-model="GPRS.conf"/>-->
+			<!--<model id="${template.GPRS}" ref-model="GPRS.conf.bak"/>-->
 		<!--</template>-->
 	<!--</bean>-->
 </configuration>

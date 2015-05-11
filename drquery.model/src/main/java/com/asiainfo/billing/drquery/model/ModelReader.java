@@ -91,6 +91,10 @@ public class ModelReader implements InitializingBean{
 		if(table!=null){
 			metaModel.setTable(table.getValue());
 		}
+        Attribute useCache = root.attribute("useCache");
+        if(useCache != null && "true".equals(useCache.getValue())){
+            metaModel.setUseCache(true);
+        }
 		Attribute name = root.attribute("name");
 		if(name!=null){
 			metaModel.setName(name.getValue());

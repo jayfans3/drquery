@@ -1,0 +1,1 @@
+mvn -s Z:\app\apache-maven-3.2.5\conf\settings-2.xml install -Dmaven.test.skip=true

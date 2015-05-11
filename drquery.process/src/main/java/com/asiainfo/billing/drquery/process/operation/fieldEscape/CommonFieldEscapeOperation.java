@@ -1,23 +1,21 @@
 package com.asiainfo.billing.drquery.process.operation.fieldEscape;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.asiainfo.billing.drquery.model.Field;
 import com.asiainfo.billing.drquery.model.MetaModel;
 import com.asiainfo.billing.drquery.process.compile.BeanInvoker;
 import com.asiainfo.billing.drquery.process.core.request.DRProcessRequest;
 import com.asiainfo.billing.drquery.process.operation.fieldEscape.model.FieldEscapeLoader;
 import com.asiainfo.billing.drquery.process.operation.fieldEscape.model.FieldEscapeModel;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Rex Wong
@@ -41,15 +39,9 @@ public class CommonFieldEscapeOperation implements FieldEscapeOperation{
     	List<Map<String,String>> tempModels = new ArrayList<Map<String,String>>();
     	for(Map<String,String> tempModel : models){
     		Map<String,String> model = new HashMap<String,String>();
-    		for(Iterator it = tempModel.keySet().iterator(); it.hasNext();){
-    			String fieldName = (String) it.next();
-    			Field field = fieldEscapes.get(fieldName);
-    			if(fieldEscapes.containsKey(fieldName)){
-    				model.put(fieldName, fieldConversion(tempModel, field, request));
-    			}else {
-                    model.put(fieldName,tempModel.get(fieldName));
-                }
-    		}
+            for(Map.Entry<String, Field> entry : fieldEscapes.entrySet()) {
+                model.put(entry.getKey(), fieldConversion(tempModel, entry.getValue(), request));
+            }
     		tempModels.add(model);
     	}
 		return tempModels;

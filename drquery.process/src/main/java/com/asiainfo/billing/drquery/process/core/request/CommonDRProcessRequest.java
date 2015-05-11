@@ -17,11 +17,18 @@ public class CommonDRProcessRequest extends DRProcessRequest {
 	}
 	
 	public String getProcessType(){
-		String interfaceType = this.getInterfaceType();
-		String processType = null;
-		if("F11".equals(interfaceType) || "F12".equals(interfaceType)){
-			processType = "GPRSFLOW";	//对应busiMapping里modelId
-		}
-		return processType;
+//		String interfaceType = this.getInterfaceType();
+//		String processType = null;
+//		if("F6".equals(interfaceType)){
+//			processType = "GPRSFLOW_SUM_VIEW";	//对应viewMapping里modelId
+//		} else if("F12".equals(interfaceType)){
+//            processType = "GPRSFLOW_DETAIL_VIEW";	//对应viewMapping里modelId
+//        } else if("appUpdate".equals(interfaceType) || "detailUpdate".equals(interfaceType)){
+//            processType = "GPRSFLOW_UPDATE";	//对应viewMapping里modelId
+//        }else {
+//            throw new RuntimeException("interfaceType type invalid, require type is F11 or F12, F13, appUpdate, detailUpdate, but found: " + interfaceType);
+//        }
+//		return processType;
+        return this.getInterfaceType();
 	}
 }
